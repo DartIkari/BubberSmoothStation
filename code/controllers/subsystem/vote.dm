@@ -5,7 +5,6 @@ SUBSYSTEM_DEF(vote)
 	name = "Vote"
 	wait = 1 SECONDS
 	flags = SS_KEEP_TIMING
-	init_order = INIT_ORDER_VOTE
 	runlevels = RUNLEVEL_LOBBY | RUNLEVELS_DEFAULT
 
 	/// A list of all generated action buttons
@@ -169,12 +168,12 @@ SUBSYSTEM_DEF(vote)
 	else
 		voted += voter.ckey
 
-	if(current_vote.choices_by_ckey[voter.ckey + their_vote] == 1)
-		current_vote.choices_by_ckey[voter.ckey + their_vote] = 0
+	if(current_vote.choices_by_ckey["[voter.ckey]_[their_vote]"] == 1) // BUBBER EDIT CHANGE - Original: [voter.ckey + their_vote]
+		current_vote.choices_by_ckey["[voter.ckey]_[their_vote]"] = 0 // BUBBER EDIT CHANGE - Original: [voter.ckey + their_vote]
 		current_vote.choices[their_vote]--
 
 	else
-		current_vote.choices_by_ckey[voter.ckey + their_vote] = 1
+		current_vote.choices_by_ckey["[voter.ckey]_[their_vote]"] = 1 // BUBBER EDIT CHANGE - Original: [voter.ckey + their_vote]
 		current_vote.choices[their_vote]++
 
 	return TRUE
